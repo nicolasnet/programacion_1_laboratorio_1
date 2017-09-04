@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1504047265 source:d:\gomez nicolas rodrigo\clase 4\calculo.c
+
+1504052275 source:d:\gomez nicolas rodrigo\clase 4\main.c
+	<stdlib.h>
+	"calculo.h"
+	<stdio.h>
+
+1504047254 d:\gomez nicolas rodrigo\clase 4\calculo.h
+
