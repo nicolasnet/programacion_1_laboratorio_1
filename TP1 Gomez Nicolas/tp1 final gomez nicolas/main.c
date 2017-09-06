@@ -11,19 +11,18 @@
 int main()
 {
 
-    int numero1=0, numero2=0;
-    float resultado;
+    float numero1=0, numero2=0, resultado;
     char seguir='s';
     int opcion=0;
 
     while(seguir=='s')
     {
-        printf("\n1- Ingresar 1er operando (num1=%d)\n", numero1);
-        printf("2- Ingresar 2do operando (num2=%d)\n", numero2);
-        printf("3- Calcular la suma (%d+%d)\n", numero1,numero2);
-        printf("4- Calcular la resta (%d-%d)\n", numero1,numero2);
-        printf("5- Calcular la division (%d/%d)\n", numero1,numero2);
-        printf("6- Calcular la multiplicacion (%d*%d)\n", numero1,numero2);
+        printf("\n1- Ingresar 1er operando (num1=%.2f)\n", numero1);
+        printf("2- Ingresar 2do operando (num2=%.2f)\n", numero2);
+        printf("3- Calcular la suma (%.2f+%.2f)\n", numero1,numero2);
+        printf("4- Calcular la resta (%.2f-%.2f)\n", numero1,numero2);
+        printf("5- Calcular la division (%.2f/%.2f)\n", numero1,numero2);
+        printf("6- Calcular la multiplicacion (%.2f*%.2f)\n", numero1,numero2);
         printf("7- Calcular el factorial (%d!)\n", numero1);
         printf("8- Calcular todas las operaciones\n");
         printf("9- Salir\n");
@@ -36,12 +35,12 @@ int main()
         {
             case 1: //se ingresa el primer numero.
                 printf("ingrese numero1: ");
-                scanf("%d", &numero1);
+                scanf("%.2f", &numero1);
                 break;
 
             case 2: //se ingresa el segundo numero.
                 printf("ingrese numero2: ");
-                scanf("%d", &numero2);
+                scanf("%.2f", &numero2);
                 break;
 
             case 3: //SUMA de los numeros.
@@ -63,7 +62,7 @@ int main()
                 else
                 {
                 resultado= division(numero1, numero2);
-                printf("la division de los numeros es: %.2f\n", resultado);
+                printf("la division de los numeros es: %.4f\n", resultado);
                 break;
                 }
 
@@ -81,7 +80,7 @@ int main()
                 else
                 {
                 resultado=factorial(numero1);
-                printf("El factorial de %d es %.2f\n",numero1,resultado);
+                printf("El factorial de %d es %.0f\n",numero1,resultado);
                 break;
                 }
             case 8: //realizar todas las operaciones.
@@ -101,7 +100,7 @@ int main()
                 }
                 else
                 {
-                resultado= (float) division(numero1, numero2);
+                resultado= division(numero1, numero2);
                 printf("la division de los numeros es: %.2f\n", resultado);
                 }
 
@@ -117,7 +116,7 @@ int main()
                 else
                 {
                 resultado=factorial(numero1);
-                printf("El factorial de %d es %.2f\n",numero1,resultado);
+                printf("El factorial de %d es %.0f\n",numero1,resultado);
                 }
 
 
