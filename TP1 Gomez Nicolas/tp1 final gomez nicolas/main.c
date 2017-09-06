@@ -2,9 +2,11 @@
 #include <stdlib.h>
 #include "calculadora.h"
 
-//PROBLEMA CON FLOAT EN LA DIVISION
-//DUDA CON LOS ARCHIVOS .c Y .h
 
+//revisar el .h q aparece en el esqueleto, el bloque de codigo q aparece sirve para q no salte error en caso de incluir
+//bibliotecas en los otros archivos .c del proyecto,
+
+//cambiar todos los int por float para poder hacer operaciones con los numeros reales
 
 int main()
 {
@@ -71,10 +73,17 @@ int main()
                 break;
 
             case 7: //saca factorial del numero1.
+                if(numero1==0)
+                {
+                    printf("ERROR, ingresar nros naturales distintos de 0 (cero)");
+                    break;
+                }
+                else
+                {
                 resultado=factorial(numero1);
                 printf("El factorial de %d es %.2f\n",numero1,resultado);
                 break;
-
+                }
             case 8: //realizar todas las operaciones.
 
                  //SUMA de los numeros.
@@ -99,6 +108,18 @@ int main()
                 //MULTIPLICACION de los numeros.
                 resultado=multiplicacion(numero1, numero2);
                 printf("la multiplicacion de los numeros es: %.2f\n", resultado);
+
+                //saca factorial del numero1.
+                if(numero1==0)
+                {
+                    printf("ERROR, ingresar nros naturales distintos de 0 (cero)");
+                }
+                else
+                {
+                resultado=factorial(numero1);
+                printf("El factorial de %d es %.2f\n",numero1,resultado);
+                }
+
 
                 break;
 
