@@ -1,3 +1,12 @@
 # depslib dependency file v1.0
 1504574378 source:c:\users\alumno\downloads\programacion_1_laboratorio_1-master\tp1 gomez nicolas\tp1 final gomez nicolas\calculadora.c
 
+1504747286 source:m:\nicolas\descargas\programacion_1_laboratorio_1-master\tp1 gomez nicolas\tp1 final gomez nicolas\calculadora.c
+
+1504747493 source:m:\nicolas\descargas\programacion_1_laboratorio_1-master\tp1 gomez nicolas\tp1 final gomez nicolas\main.c
+	<stdio.h>
+	<stdlib.h>
+	"calculadora.h"
+
+1504716650 m:\nicolas\descargas\programacion_1_laboratorio_1-master\tp1 gomez nicolas\tp1 final gomez nicolas\calculadora.h
+

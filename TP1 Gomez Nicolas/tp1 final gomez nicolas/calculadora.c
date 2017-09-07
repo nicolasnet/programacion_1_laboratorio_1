@@ -1,4 +1,4 @@
-#ifndef FUNCIONES_H_INCLUDED  //revisar funcionamiento de este bloque de codigos, sirve para vincular y q no se dupliquen las bibliotecas del proyecto
+#ifndef FUNCIONES_H_INCLUDED  //vincular y evitar duplicacion de las bibliotecas de todo el proyecto.
 #define FUNCIONES_H_INCLUDED
 
 
@@ -51,7 +51,7 @@ int factorial(int numero)
         return 1;
     }
 
-    resp=numero* factorial(numero-1);
+    resp=numero*factorial(numero-1);
     return (resp);
 }
 
