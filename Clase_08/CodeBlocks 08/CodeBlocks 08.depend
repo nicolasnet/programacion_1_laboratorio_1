@@ -1,0 +1,24 @@
+# depslib dependency file v1.0
+1505265193 source:d:\gomez nicolas rodrigo\clase_08\codeblocks 08\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"tipodedatos.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"tipodedatos.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"tipodedatos.h"
+
+1505257473 d:\gomez nicolas rodrigo\clase_08\codeblocks 08\tipodedatos.h
+
