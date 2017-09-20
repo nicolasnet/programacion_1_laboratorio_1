@@ -45,7 +45,7 @@ void alta(EPersona persona[]){
             scanf("%d", &persona[i].edad);
 
             printf("ingresar DNI: \n");
-            scanf("%d", &persona[i].dni);
+            scanf("%ld", &persona[i].dni);
 
             persona[i].estado = 1;
 
@@ -58,11 +58,44 @@ void alta(EPersona persona[]){
 }
 
 
+void listar(EPersona persona[], int CANT){
+    int i;
+
+    for(i=0; i<CANT; i++){
+
+        if(persona[i].estado == 1)
+        {
+        printf("%s", persona[i].nombre);
+        printf("%d", persona[i].edad);
+        printf("%ld", persona[i].dni);
+        }
+    }
+
+}
 
 
 
+void ordenar(EPersona persona[], int CANT){
+    int i, j;
+    EPersona auxiliar;
+
+    for(i=0; i<CANT; i++){
+        for(j=i+1; j<CANT; j++){
+            if(strcmp(persona[i].nombre, persona[j].nombre)>0){
+                //- hacer codigo q reemplaza y ordena.
+                //- cuando reemplazamos para ordenar, usamos el = ya q reemplazamos toda la estructura NO HACERLO CAMPO X CAMPO
+                    persona[i] = auxiliar;
+                    persona[j] = persona[i];
+                    auxiliar = persona[j];
+            }
+
+        }
+    }
+    listar(EPersona persona[], int CANT);
+    }
 
 
+//hacer funcion q imprime
 
 
 

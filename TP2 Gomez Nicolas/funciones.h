@@ -13,6 +13,11 @@ void alta(EPersona persona[]);
 
 void inicia(EPersona persona[]);
 
+void ordenar(EPersona persona[], int CANT);
+
+void listar(EPersona persona[], int CANT);
+
+
 /**
  * Obtiene el primer indice libre del array.
  * @param lista el array se pasa como parametro.
