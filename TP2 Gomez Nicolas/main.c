@@ -12,6 +12,12 @@ int main()
     EPersona persona[CANT];
     char seguir='s';
     int opciones=0;
+
+    int menores18=0;
+    int entre18y35=0;
+    int mayores35=0;
+
+
     //crear contadores para los parametros de edad, y usarlos como bandera para q no puedan usar las opciones 2,3,4 si no hay datos cargado
     /*ejemplo q se me ocurrio   if(hasta18==0 && entre18y35==0 && mayor35==0){
                                         no hacer nada;
@@ -24,23 +30,27 @@ int main()
 
     while(seguir=='s')
     {
-       system("cls");
-       opciones = menu("1- Agregar persona\n2- Borrar persona\n3- Imprimir lista ordenada por  nombre\n4- Imprimir grafico de edades\n\n5- Salir\n", 1, 5);
 
+       opciones = menu("1- Agregar persona\n2- Borrar persona\n3- Imprimir lista ordenada por  nombre\n4- Imprimir grafico de edades\n\n5- Salir\n\n", 1, 5);
+       system("cls");
 
 
         switch(opciones)
         {
             case 1:
-                alta(persona);
+                alta(persona, menores18, entre18y35, mayores35);
+                system("cls");
+
                 break;
 
             case 2:
-                borrar(persona); //hacer esta funcion donde cambias la bandera ESTADO a cero para q se pueda sobreescribir
+                //borrar(persona); //hacer esta funcion donde cambias la bandera ESTADO a cero para q se pueda sobreescribir
+                borrar(persona, CANT);
                 break;
 
             case 3://una funcion que ordene otra que liste.
                 ordenar(persona, CANT);
+                listar(persona, CANT);
 
                 break;
 
@@ -53,8 +63,7 @@ int main()
 
                  */
 
-
-                break;
+                 break;
 
             case 5:
                 seguir = 'n';

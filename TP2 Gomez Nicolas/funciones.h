@@ -9,9 +9,11 @@ typedef struct {
 
 int menu(char opciones[], int limiteInferior, int limiteSuperior);
 
-void alta(EPersona persona[]);
+void alta(EPersona persona[], int menores18, int entre18y35, int mayores35);
 
 void inicia(EPersona persona[]);
+
+void borrar(EPersona persona[], int CANT);
 
 void ordenar(EPersona persona[], int CANT);
 

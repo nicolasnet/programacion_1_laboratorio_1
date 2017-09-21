@@ -10,6 +10,7 @@
 int menu(char items[], int limiteInferior, int limiteSuperior){
 
     int opciones;
+
     printf("%s", items);
     printf("elegir: ");
     scanf("%d", &opciones);
@@ -31,7 +32,7 @@ void inicia(EPersona persona[]){
 }
 
 
-void alta(EPersona persona[]){
+void alta(EPersona persona[], int menores18, int entre18y35, int mayores35){
     int i;
 
     for(i=0; i<20; i++){
@@ -43,6 +44,9 @@ void alta(EPersona persona[]){
 
             printf("ingresar edad: \n");
             scanf("%d", &persona[i].edad);
+            if(persona[i].edad<18){
+                menores18++;
+            }
 
             printf("ingresar DNI: \n");
             scanf("%ld", &persona[i].dni);
@@ -54,24 +58,40 @@ void alta(EPersona persona[]){
 
     }
 
-
 }
 
 
-void listar(EPersona persona[], int CANT){
+
+void borrar(EPersona persona[], int CANT){
+
+    long int dni;
     int i;
+    char seguir;
+
+    printf("Ingrese el dni a eliminar de la base de datos: ");
+    scanf("%ld", &dni);
 
     for(i=0; i<CANT; i++){
+        if(persona[i].estado == 1){
 
-        if(persona[i].estado == 1)
-        {
-        printf("%s", persona[i].nombre);
-        printf("%d", persona[i].edad);
-        printf("%ld", persona[i].dni);
+                if (dni == persona[i].dni){
+                    printf("presione 's' para confimar eliminacion de: %s, o 'n' para cancelar\n", persona[i].nombre);
+                    seguir = getch();
+                    if(seguir == 's'){
+                        persona[i].estado = 0;
+
+                    }
+                    else{
+                        break;
+                    }
+
+                }
         }
     }
-
 }
+
+
+
 
 
 
@@ -82,20 +102,34 @@ void ordenar(EPersona persona[], int CANT){
     for(i=0; i<CANT; i++){
         for(j=i+1; j<CANT; j++){
             if(strcmp(persona[i].nombre, persona[j].nombre)>0){
-                //- hacer codigo q reemplaza y ordena.
-                //- cuando reemplazamos para ordenar, usamos el = ya q reemplazamos toda la estructura NO HACERLO CAMPO X CAMPO
-                    persona[i] = auxiliar;
-                    persona[j] = persona[i];
-                    auxiliar = persona[j];
+
+                persona[i] = auxiliar;
+                persona[j] = persona[i];
+                auxiliar = persona[j];
             }
 
         }
     }
-    listar(EPersona persona[], int CANT);
+
     }
 
 
-//hacer funcion q imprime
+
+void listar(EPersona persona[], int CANT){
+    int i;
+
+    for(i=0; i<CANT; i++){
+
+        if(persona[i].estado == 1)
+        {
+        printf("%s   ", persona[i].nombre);
+        printf("%d   ", persona[i].edad);
+        printf("%ld\n", persona[i].dni);
+        }
+    }
+
+
+}
 
 
 
