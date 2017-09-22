@@ -7,6 +7,7 @@
 #include "funciones.h"
 
 
+
 int menu(char items[]){
 
     int opciones;
@@ -30,6 +31,7 @@ int menu(char items[]){
 }
 
 
+
 void inicia(EPersona persona[]){
     int i;
     for(i=0; i<20; i++){
@@ -38,21 +40,54 @@ void inicia(EPersona persona[]){
 }
 
 
+
 void alta(EPersona persona[]){
-    int i;
+    int i, j;
+    char auxNombre[150];
 
     for(i=0; i<20; i++){
-        if (persona[i].estado==0 ){
 
+
+        if (persona[i].estado==0 )
+        {
+            //NOMBRE
             printf("ingresar nombre: \n");
             fflush(stdin);
-            scanf("%[^\n]", persona[i].nombre);
+            scanf("%[^\n]", auxNombre);
+            while(strlen(auxNombre)>49 || strlen(auxNombre)<2)
+            {
+                printf("entre 2 y 50 caracteres: ");
+                fflush(stdin);
+                scanf("%[^\n]", auxNombre);
+            }
+            strcpy(persona[i].nombre, auxNombre);
 
+            strlwr(persona[i].nombre);
+            persona[i].nombre[0] = toupper(persona[i].nombre[0]);
+
+            for(j=0; j<50; j++)
+            {
+                if(persona[i].nombre[j] == ' ' && persona[i].nombre[j+1] != ' ')
+                {
+                     persona[i].nombre[j+1] = toupper(persona[i].nombre[j+1]);
+                }
+            }
+
+            //EDAD
             printf("ingresar edad: \n");
             scanf("%d", &persona[i].edad);
+            while(persona[i].edad <1 || persona[i].edad>100)
+            {
+                scanf("%d", &persona[i].edad);
+            }
 
+            //DNI
             printf("ingresar DNI: \n");
             scanf("%ld", &persona[i].dni);
+            while(persona[i].dni<0 || persona[i].dni>99999999 )
+            {
+                scanf("%ld", &persona[i].dni);
+            }
 
             persona[i].estado = 1;
 
@@ -62,6 +97,7 @@ void alta(EPersona persona[]){
     }
 
 }
+
 
 
 void borrar(EPersona persona[], int CANT){
@@ -93,6 +129,7 @@ void borrar(EPersona persona[], int CANT){
 }
 
 
+
 void ordenar(EPersona persona[], int CANT){
     int i, j;
     EPersona auxiliar;
@@ -112,25 +149,28 @@ void ordenar(EPersona persona[], int CANT){
     }
 
 
+
 void listar(EPersona persona[], int CANT){
     int i, flag=0;
 
+    printf("Listado de personas ingresadas:\n\n");
     for(i=0; i<CANT; i++){
 
         if(persona[i].estado == 1)
         {
         printf("%s   ", persona[i].nombre);
-        printf("%d   ", persona[i].edad);
-        printf("%ld\n", persona[i].dni);
+        printf("Edad: %d   ", persona[i].edad);
+        printf("DNI: %ld\n", persona[i].dni);
         flag=1;
         }
     }
     if(flag==0){
         printf("No hay datos de personas cargadas.\n");
     }
-
+    printf("\n\n");
 
 }
+
 
 
 void graficar(EPersona persona[],int CANT){
@@ -213,6 +253,7 @@ void graficar(EPersona persona[],int CANT){
     printf("\n   %d\t%d\t%d\n\n", menores18, entre18y35, mayores35);
 
 }
+
 
 
 #endif

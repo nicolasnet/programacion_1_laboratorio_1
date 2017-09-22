@@ -47,3 +47,29 @@
 	<ctype.h>
 	"funciones.h"
 
+1506107527 source:c:\users\ed\downloads\programacion_1_laboratorio_1-master\programacion_1_laboratorio_1-master\tp2 gomez nicolas\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funciones.h"
+
+1506112789 c:\users\ed\downloads\programacion_1_laboratorio_1-master\programacion_1_laboratorio_1-master\tp2 gomez nicolas\funciones.h
+
+1506113477 source:c:\users\ed\downloads\programacion_1_laboratorio_1-master\programacion_1_laboratorio_1-master\tp2 gomez nicolas\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funciones.h"
+
+1506093149 c:\users\ed\downloads\programacion_1_laboratorio_1-master\programacion_1_laboratorio_1-master\tp2 gomez nicolas\input.h
+
+1506104871 source:c:\users\ed\downloads\programacion_1_laboratorio_1-master\programacion_1_laboratorio_1-master\tp2 gomez nicolas\input.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funciones.h"
+	"input.h"
+
