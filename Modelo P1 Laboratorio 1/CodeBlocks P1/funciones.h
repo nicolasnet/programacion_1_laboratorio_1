@@ -3,7 +3,6 @@ typedef struct {
     char descripcionProd[51];
     float importe;
     int cantidad;
-    int codigoProveedor;
     int estado;
 
 }eProducto;
@@ -11,19 +10,26 @@ typedef struct {
 typedef struct {
     int codigo;
     char descripcionProv[51];
-
 }eProveedor;
 
-/* no lo pide en el examen. pero se usaria en caso de q un proveedor tenga varios productos y un producto varios proveedores.
 typedef struct {
-    int codigoProducto;
-    int CodigoProveedor;
+    int CodProducto;
+    int CodProveedor;
+    int estado;
+}MixProductoProveedor;
 
 
-}ProductoProveedor
-*/
 
 int menu(char opciones[], int limiteInferior, int limiteSuperior);
+
+
+void iniciaProducto(eProducto producto[], int CANTPROD);
+
+
+void iniciaMix(MixProductoProveedor codificacion[]);
+
+
+void alta(eProducto producto[], eProveedor proveedor[], MixProductoProveedor codificacion[], int CANTPROD);
 
 
 
