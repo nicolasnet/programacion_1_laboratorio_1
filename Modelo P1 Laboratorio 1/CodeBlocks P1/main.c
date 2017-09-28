@@ -13,7 +13,7 @@ int main()
     eProveedor proveedor[] = { {1,"Proveedor A"}, {2,"Proveedor B"}, {3,"Proveedor C"},{4,"Proveedor D"},{5,"Proveedor E"}, {6,"Proveedor F"},{7,"Proveedor G"},{8,"Proveedor H"},{9,"Proveedor I"},{10,"Proveedor J"}};;
     MixProductoProveedor codificacion [100];
 
-    int flag=0, opciones=0, i;
+    int flag=0, opciones=0;
     char seguir='s';
 
     iniciaProducto(producto, CANTPROD);
@@ -21,64 +21,71 @@ int main()
 
     while(seguir=='s')
     {
-        opciones = menu("1- Alta producto.\n2- Modificar producto.\n3- Baja Prodcuto.\n4- Informar.\n5- Listar.\n\n6- Salir.\n", 1, 6);
+        opciones = menu("1- Alta producto.\n2- Modificar producto.\n3- Baja Producto.\n4- Informar.\n5- Listar.\n\n6- Salir.\n", 1, 6);
         //system("pause");
         system("cls");
 
 
         switch(opciones)
         {
-            case 1:
+            case 1: //ALTA
                 alta(producto, proveedor, codificacion, CANTPROD);
                 flag=1;
                 system("cls");
                 break;
 
-            case 2:
+            case 2: //MODIFICAR
                 if(flag==0)
-        {
-            printf("Se debe dar de alta al menos un producto...");
-        }
-        else{
-
-                    for(i=0; i<CANTPROD; i++){
-
-                    if(producto[i].estado==1){
-                        printf("cod: %d\n", producto[i].codigo);
-                        printf("descrip: %s\n", producto[i].descripcionProd);
-                        printf("cant: %d\n", producto[i].cantidad);
-                        printf("importe: %f\n", producto[i].importe);
-                        printf("estado: %d\n\n", producto[i].estado);
-
-                        printf("codprod: %d\n", codificacion[i].CodProducto);
-                        printf("codprov: %d\n\n", codificacion[i].CodProveedor);
-                    }
+                {
+                    printf("Se debe dar de alta al menos un producto.\n");
                 }
+                else{
+                    modificar(producto, proveedor, codificacion, CANTPROD);
 
 
-
-        }
-        break;
-            case 3:
+                }
+                system("cls");
+                break;
+            case 3: //BAJA
                 if(flag==0)
-        {
-            printf("Se debe dar de alta al menos un producto...");
-        }
-        else{
-            /**/
-        }
+                {
+                    printf("Se debe dar de alta al menos un producto.\n");
+                }
+                else{
+
+                    borrarProducto(producto, proveedor, codificacion, CANTPROD);
+
+
+                }
                 break;
 
-            case 4:
+            case 4: //INFORMAR MIN Y MAX
+                if(flag==0)
+                {
+                    printf("Se debe dar de alta al menos un producto.\n");
+                }
+                else{
+
+                    informaMinMax(producto, CANTPROD);
+
+                }
                 break;
+
 
             case 5:
+                if(flag==0)
+                {
+                    printf("Se debe dar de alta al menos un producto.\n");
+                }
+                else{
+                        imprimeProductos(producto, CANTPROD);
+
+                    /**/
+                }
                 break;
 
 
-
-
-        case 6:
+            case 6:
                 seguir='n';
                 break;
         }
