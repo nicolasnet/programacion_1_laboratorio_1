@@ -21,7 +21,7 @@ int validaOpcionesInt(char dato[], int limiteInferior, int limiteSuperior){
         }
     }
     while(flag==1 || atoi(dato)>limiteSuperior || atoi(dato)<limiteInferior){
-        printf("\nreintente elegir: ");
+        printf("reintente elegir (entre %d y %d): ", limiteInferior, limiteSuperior);
         scanf("%s", dato);
         cant = strlen(dato);
 
@@ -38,6 +38,79 @@ int validaOpcionesInt(char dato[], int limiteInferior, int limiteSuperior){
 
     opciones = atoi(dato);
     return opciones;
+}
+
+
+
+
+
+
+float validaFloat(char dato[]){
+
+    float auxFloat;
+    int cant, i, flag=0;
+
+    cant = strlen(dato);
+    for(i=0; i<cant; i++){
+        if(isalpha(dato[i])){
+            flag = 1;
+            break;
+        }
+    }
+    while(flag==1){
+        printf("caracteres numericos unicamente: ");
+        scanf("%s", dato);
+        cant = strlen(dato);
+
+        for(i=0; i<cant; i++){
+            if(isalpha(dato[i])){
+                flag = 1;
+                break;
+            }
+            else{
+                flag = 0;
+            }
+        }
+    }
+
+    auxFloat = atof(dato);
+    return auxFloat;
+}
+
+
+
+
+
+
+
+void validaCadenaDeLetras(char auxDato [], int cantCaracteres){
+
+    int i, cant, flag=0;
+
+    while (flag==0){
+
+        cant = strlen(auxDato);
+
+        for(i=0; i<cant; i++){
+
+            if(!isdigit(auxDato[i])){
+                flag=1;
+            }
+            else{
+                flag=0;
+                break;
+            }
+        }
+
+        if(flag==0 || cant>cantCaracteres){
+
+            flag=0;
+            printf("Ingrese caracteres alfabetico (maximo:%d ): ", cantCaracteres);
+            fflush(stdin);
+            scanf("%[^\n]", auxDato);
+        }
+    }
+
 }
 
 
@@ -83,9 +156,9 @@ void imprimeProductos(eProducto producto[], int CANTPROD){
     for(i=0; i<CANTPROD; i++){
         if(producto[i].estado == 1){
             printf("Codigo: %03d\t", producto[i].codigo);
-            printf("Descripcion: %s\t", producto[i].descripcionProd);
+            printf("Descripcion: % 40s\t", producto[i].descripcionProd); //agregado la cant de espacios para q todas las descripciones queden alineadas
             printf("Cant: %04d\t", producto[i].cantidad);
-            printf("Precio: %.4f\n\n", producto[i].importe);
+            printf("Precio: $%.4f\n\n", producto[i].importe);
         }
     }
 
@@ -96,6 +169,7 @@ void imprimeProductos(eProducto producto[], int CANTPROD){
 void alta (eProducto producto[], eProveedor proveedor[], MixProductoProveedor codificacion[], int CANTPROD){
     int i;
     int j;
+    char auxDato[CANTCARACTERES*5];
 
     for (i=0; i<CANTPROD; i++){
         if (producto[i].estado==0){
@@ -104,15 +178,22 @@ void alta (eProducto producto[], eProveedor proveedor[], MixProductoProveedor co
 
                 printf("Ingrese Descripcion: \n");
                 fflush(stdin);
-                scanf("%[^\n]", producto[i].descripcionProd);
+                scanf("%[^\n]", auxDato);
+                validaCadenaDeLetras(auxDato, CANTCARACTERES);
+                strcpy(producto[i].descripcionProd, auxDato);
 
 
                 printf("Ingrese Precio del producto: \n");
-                scanf("%f", &producto[i].importe);
+                fflush(stdin);
+                scanf("%[^\n]", auxDato);
+                producto[i].importe = validaFloat(auxDato);
+
 
 
                 printf("Ingrese Cantidad ingresada del producto: \n");
-                scanf("%d", &producto[i].cantidad);
+                fflush(stdin);
+                scanf("%[^\n]", auxDato);
+                producto[i].cantidad = validaOpcionesInt(auxDato, 0, 30000);
 
 
                 for(j=0; j<10; j++){
@@ -122,7 +203,9 @@ void alta (eProducto producto[], eProveedor proveedor[], MixProductoProveedor co
                 for(j=0; j<100; j++){
                     if(codificacion[j].estado == 0){
                         printf("\nIngrese codigo de proveedor: ");
-                        scanf("%d", &codificacion[j].CodProveedor);
+                        fflush(stdin);
+                        scanf("%[^\n]", auxDato);
+                        codificacion[j].CodProveedor = validaOpcionesInt(auxDato, 1, 10);
                         codificacion[j].CodProducto = producto[i].codigo;
                         codificacion[j].estado = 1;
                         break;

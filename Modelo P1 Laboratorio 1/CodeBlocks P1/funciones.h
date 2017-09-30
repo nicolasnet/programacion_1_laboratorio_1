@@ -1,6 +1,9 @@
+#define CANTCARACTERES 40
+
+
 typedef struct {
     int codigo;
-    char descripcionProd[51];
+    char descripcionProd[CANTCARACTERES];
     float importe;
     int cantidad;
     int estado;
@@ -9,7 +12,7 @@ typedef struct {
 
 typedef struct {
     int codigo;
-    char descripcionProv[51];
+    char descripcionProv[CANTCARACTERES];
 }eProveedor;
 
 typedef struct {
@@ -20,6 +23,14 @@ typedef struct {
 
 
 int validaOpcionesInt(char dato[], int limiteInferior, int limiteSuperior);
+
+
+
+float validaFloat(char dato[]);
+
+
+
+void validaCadenaDeLetras(char auxDato [], int cantCaracteres);
 
 
 

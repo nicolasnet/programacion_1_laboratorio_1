@@ -5,7 +5,7 @@
 #include "funciones.h"
 
 #define CANTPROD 5  //cambiar a mil para el ejercicio.
-
+#define CANTCARACTERES 40
 
 int main()
 {
@@ -18,6 +18,7 @@ int main()
 
     iniciaProducto(producto, CANTPROD);
     iniciaMix(codificacion);
+
 
     while(seguir=='s')
     {
@@ -41,10 +42,9 @@ int main()
                 }
                 else{
                     modificar(producto, proveedor, codificacion, CANTPROD);
-
+                    system("cls");
 
                 }
-                system("cls");
                 break;
             case 3: //BAJA
                 if(flag==0)
@@ -73,6 +73,7 @@ int main()
 
 
             case 5:
+
                 if(flag==0)
                 {
                     printf("Se debe dar de alta al menos un producto.\n");
@@ -80,9 +81,11 @@ int main()
                 else{
                         imprimeProductos(producto, CANTPROD);
 
-                    /**/
+
                 }
                 break;
+
+
 
 
             case 6:
@@ -171,6 +174,7 @@ int main(){
     char dato[15];
     int i, flag=0, cant;
     //isalpha
+
     printf("Ingrese el dato: ");
     scanf("%s", dato);
 
@@ -179,17 +183,22 @@ int main(){
     for(i=0; i<cant; i++){
         if(!isdigit(dato[i])){
             flag = 1;
+
+        }
+        else{
+            flag=0;
             break;
         }
     }
 
     if(flag == 1){
-        printf("\nNo es un numero");
+        printf("\nNo es un numero\n");
 
     }
     else{
-        printf("\nEs un numero");
+        printf("\nEs un numero\n");
     }
+    break;
 
     return 0;
 }
