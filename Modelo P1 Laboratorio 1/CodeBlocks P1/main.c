@@ -5,12 +5,12 @@
 #include "funciones.h"
 
 #define CANTPROD 5  //cambiar a mil para el ejercicio.
-#define CANTCARACTERES 40
+#define CANTCARACTERES 40 //ojo ejercicio pide 50 caracteres.
 
 int main()
 {
     eProducto producto[CANTPROD];
-    eProveedor proveedor[] = { {1,"Proveedor A"}, {2,"Proveedor B"}, {3,"Proveedor C"},{4,"Proveedor D"},{5,"Proveedor E"}, {6,"Proveedor F"},{7,"Proveedor G"},{8,"Proveedor H"},{9,"Proveedor I"},{10,"Proveedor J"}};;
+    eProveedor proveedor[] = { {1,"Proveedor A"}, {2,"Proveedor B"}, {3,"Proveedor C"},{4,"Proveedor D"},{5,"Proveedor E"}, {6,"Proveedor F"},{7,"Proveedor G"},{8,"Proveedor H"},{9,"Proveedor I"},{10,"Proveedor J"}};
     MixProductoProveedor codificacion [100];
 
     int flag=0, opciones=0;
@@ -22,7 +22,7 @@ int main()
 
     while(seguir=='s')
     {
-        opciones = menu("1- Alta producto.\n2- Modificar producto.\n3- Baja Producto.\n4- Informar.\n5- Listar.\n\n6- Salir.\n", 1, 6);
+        opciones = menu("\t\t\tMenu Principal\n\n1- Alta producto.\n2- Modificar producto.\n3- Baja Producto.\n4- Informar.\n5- Listar.\n\n6- Salir.\n", 1, 6);
         //system("pause");
         system("cls");
 
@@ -46,6 +46,7 @@ int main()
 
                 }
                 break;
+
             case 3: //BAJA
                 if(flag==0)
                 {
@@ -71,7 +72,6 @@ int main()
                 }
                 break;
 
-
             case 5:
 
                 if(flag==0)
@@ -79,26 +79,22 @@ int main()
                     printf("Se debe dar de alta al menos un producto.\n");
                 }
                 else{
-                        imprimeProductos(producto, CANTPROD);
 
-
+                        listaOrdenado(producto, proveedor, codificacion, CANTPROD);
+                        //imprimeProductos(producto, CANTPROD);
                 }
                 break;
-
-
-
 
             case 6:
                 seguir='n';
                 break;
         }
-
-
     }
-
 
     return 0;
 }
+
+
 
 
 

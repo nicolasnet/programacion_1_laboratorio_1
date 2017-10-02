@@ -42,9 +42,6 @@ int validaOpcionesInt(char dato[], int limiteInferior, int limiteSuperior){
 
 
 
-
-
-
 float validaFloat(char dato[]){
 
     float auxFloat;
@@ -76,10 +73,6 @@ float validaFloat(char dato[]){
     auxFloat = atof(dato);
     return auxFloat;
 }
-
-
-
-
 
 
 
@@ -145,6 +138,7 @@ void iniciaMix(MixProductoProveedor codificacion[]){
 
     for (i=0; i<100; i++){
         codificacion[i].estado = 0;
+        codificacion[i].CodProveedor = 0;
     }
 }
 
@@ -181,6 +175,23 @@ void alta (eProducto producto[], eProveedor proveedor[], MixProductoProveedor co
                 scanf("%[^\n]", auxDato);
                 validaCadenaDeLetras(auxDato, CANTCARACTERES);
                 strcpy(producto[i].descripcionProd, auxDato);
+                strupr(producto[i].descripcionProd);
+
+
+                /* para tener todo en minuscula y las primeras d c/nombre en mayuscula
+            strlwr(persona[i].nombre);
+            persona[i].nombre[0] = toupper(persona[i].nombre[0]);
+
+            for(j=0; j<50; j++)
+            {
+                if(persona[i].nombre[j] == ' ' && persona[i].nombre[j+1] != ' ')
+                {
+                     persona[i].nombre[j+1] = toupper(persona[i].nombre[j+1]);
+                }
+            }
+
+
+                */
 
 
                 printf("Ingrese Precio del producto: \n");
@@ -227,8 +238,8 @@ void alta (eProducto producto[], eProveedor proveedor[], MixProductoProveedor co
 
 void modificar(eProducto producto[], eProveedor proveedor[], MixProductoProveedor codificacion[], int CANTPROD){
 
-    int i, opciones, codigoInt;
-    char auxCodigo[10];
+    int i, j, opciones, codigoInt;
+    char auxCodigo[10], auxDato[CANTCARACTERES*5];
 
     imprimeProductos(producto, CANTPROD);
 
@@ -240,7 +251,7 @@ void modificar(eProducto producto[], eProveedor proveedor[], MixProductoProveedo
 
     for(i=0; i<CANTPROD; i++){
             if(codigoInt == producto[i].codigo){
-                opciones= menu("1- Modificar descripcion producto.\n2- Modificar codigo proveedor.\n3- Modificar Importe.\n4- Modificar cantidades.\n5- Salir.\n", 1, 5);
+                opciones = menu("\t\t\tModificacion de datos:\n\n1- Modificar descripcion producto.\n2- Modificar codigo proveedor.\n3- Modificar Importe.\n4- Modificar cantidades.\n5- Salir.\n", 1, 5);
 
                 system("cls");
 
@@ -248,37 +259,48 @@ void modificar(eProducto producto[], eProveedor proveedor[], MixProductoProveedo
                     case 1:
                         printf("Ingrese Descripcion: \n");
                         fflush(stdin);
-                        scanf("%[^\n]", producto[i].descripcionProd);
-
-
+                        scanf("%[^\n]", auxDato);
+                        validaCadenaDeLetras(auxDato, CANTCARACTERES);
+                        strcpy(producto[i].descripcionProd, auxDato);
+                        strupr(producto[i].descripcionProd);
                         break;
 
                     case 2:
+                        for(j=0; j<10; j++){
+                            printf("\n%d -- %s\n", proveedor[j].codigo, proveedor[j].descripcionProv);
+                        }
 
-                        printf(" ");
+                        for(j=0; j<100; j++){
+                            if(codificacion[j].CodProducto == codigoInt){
+                                printf("\nIngrese nuevo codigo de proveedor: ");
+                                fflush(stdin);
+                                scanf("%[^\n]", auxDato);
+                                codificacion[j].CodProveedor = validaOpcionesInt(auxDato, 1, 10);
+                                break;
 
+                            }
+                        }
                         break;
 
                     case 3:
                         printf("Ingrese Precio del producto: \n");
-                        scanf("%f", &producto[i].importe);
-
+                        fflush(stdin);
+                        scanf("%[^\n]", auxDato);
+                        producto[i].importe = validaFloat(auxDato);
                         break;
 
                     case 4:
                         printf("Ingrese Cantidad ingresada del producto: \n");
-                        scanf("%d", &producto[i].cantidad);
-
+                        fflush(stdin);
+                        scanf("%[^\n]", auxDato);
+                        producto[i].cantidad = validaOpcionesInt(auxDato, 0, 30000);
                         break;
 
                     case 5:
                         break;
                 }
-
             }
     }
-
-
 }
 
 
@@ -290,22 +312,23 @@ void borrarProducto(eProducto producto[], eProveedor proveedor[], MixProductoPro
 
     imprimeProductos(producto, CANTPROD);
 
-    printf("Elegir Codigo de producto para eliminar: ");
+    printf("Elegir Codigo de producto para eliminar (con cero sale): ");
     scanf("%s", auxCodigo);
-    codigoInt = validaOpcionesInt(auxCodigo, 1, CANTPROD);
+    printf("\n");
+    codigoInt = validaOpcionesInt(auxCodigo, 0, CANTPROD);
+    if(auxCodigo > 0){
 
-    for(i=0; i<CANTPROD; i++){
-        if(producto[i].codigo == codigoInt){
-            producto[i].estado = 0;
-            break;
-        }
-    }
-    for(i=0; i<100; i++){
-            if(codificacion[i].CodProducto == codigoInt){
-                codificacion[i].estado = 0;
+        for(i=0; i<CANTPROD; i++){
+            if(producto[i].codigo == codigoInt){
+                producto[i].estado = 0;
+                break;
             }
-
-
+        }
+        for(i=0; i<100; i++){
+                if(codificacion[i].CodProducto == codigoInt){
+                    codificacion[i].estado = 0;
+                }
+        }
     }
 }
 
@@ -357,6 +380,39 @@ void informaMinMax(eProducto producto[], int CANTPROD){
     }
 }
 
+
+
+void listaOrdenado(eProducto producto[], eProveedor proveedor[], MixProductoProveedor codificacion[], int CANTPROD){
+    int i, j, k, flag;
+
+
+
+    for(i=9; i>-1; i--){ //proveedores
+            flag=0;
+        for(j=0; j<100; j++){ //codificacion
+
+            if(proveedor[i].codigo == codificacion[j].CodProveedor){
+                if(flag==0){
+                        printf("\n-%s: " , proveedor[i].descripcionProv);
+                        flag=1;
+                }
+                for(k=0; k<CANTPROD; k++){ //productos
+
+                    if(codificacion[j].CodProducto == producto[k].codigo && producto[k].estado==1){
+
+                        printf("\n\tCodigo: %03d\t", producto[k].codigo);
+                        printf("Cant: %04d\t", producto[k].cantidad);
+                        printf("Precio: $%.4f\t", producto[k].importe);
+                        printf("Descripcion: %s", producto[k].descripcionProd);
+                    }
+                }
+            }
+        }
+    }
+
+    printf("\n\n\n");
+
+}
 
 
 #endif
