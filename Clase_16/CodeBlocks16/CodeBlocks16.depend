@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1507677135 source:d:\gomez nicolas rodrigo\clase_16\codeblocks16\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funciones.h"
+
+1507677284 d:\gomez nicolas rodrigo\clase_16\codeblocks16\funciones.h
+
+1507684127 source:d:\gomez nicolas rodrigo\clase_16\codeblocks16\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funciones.h"
+
