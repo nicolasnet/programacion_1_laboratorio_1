@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1508274457 source:c:\users\ed\downloads\programacion_1_laboratorio_1-master\programacion_1_laboratorio_1-master\tp3 gomez nicolas\tp3 gomez nicolas\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funciones.h"
+
+1508273761 c:\users\ed\downloads\programacion_1_laboratorio_1-master\programacion_1_laboratorio_1-master\tp3 gomez nicolas\tp3 gomez nicolas\funciones.h
+
