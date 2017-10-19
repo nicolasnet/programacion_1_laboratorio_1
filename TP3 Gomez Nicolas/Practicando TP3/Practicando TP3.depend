@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1508375646 source:m:\nicolas\descargas\programacion_1_laboratorio_1-master\tp3 gomez nicolas\practicando tp3\main.c
+	<stdio.h>
+	<stdio.h>
+	<stdio.h>
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<ctype.h>
+	<conio.h>
+

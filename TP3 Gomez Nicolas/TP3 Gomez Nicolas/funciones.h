@@ -1,10 +1,13 @@
+#define CANTCARACTERES 25
+
+
 typedef struct{
-    char titulo[20];
-    char genero[20];
+    char titulo[CANTCARACTERES];
+    char genero[CANTCARACTERES];
     int duracion;
-    char descripcion[50];
-    int puntaje;
-    char linkImagen[50];
+    char descripcion[CANTCARACTERES*2];
+    float puntaje;
+    char linkImagen[CANTCARACTERES*6];
 }EMovie;
 
 
@@ -17,28 +20,51 @@ typedef struct{
  * \return El numero ingresado en formato INT validado
  *
  */
-int validaOpcionesInt(char dato[], int limiteInferior, int limiteSuperior);
+int validaOpcionesInt(char *auxdato, int limiteInferior, int limiteSuperior);
 
 
 
 /** \brief Validaicon de numeros decimales.
  *
- * \param dato[] char: dato ingresado sujeto a validacion
- * \return float: El numero decimal validado y convertido a float
+ * \param dato char*: dato ingresado sujeto a validacion.
+ * \return float: El numero decimal validado y convertido a float.
  *
  */
-float validaFloat(char dato[]);
+float validaFloat(char *auxdato);
+
+
+
+/** \brief Validaicon de numeros decimales, entre 2 limites.
+ *
+ * \param dato char*: dato ingresado sujeto a validacion
+ * \param limiteInferior float: numero real dado como valor minimo aceptado.
+ * \param limiteSuperior float: numero real dado como valor maximo aceptado.
+ * \return float: El numero decimal validado y convertido a float.
+ *
+ */
+float validaPuntaje(char *dato, float limiteInferior, float limiteSuperior);
 
 
 
 /** \brief Validacion para cadena de letras.
  *
- * \param [] char auxDato: cadena de char sujeta a validacion.
+ * \param auxDato char*: cadena de char sujeta a validacion.
  * \param cantCaracteres int: Cantidad maxima de caracteres permitidos.
- * \return void La funcion modifica esa cadena dada, validando que no posea valores numericos y que el tamaño se ajuste al valor dado.
+ * \return void La funcion modifica la cadena dada, validando que no posea valores numericos y que el tamaño se ajuste al valor dado.
  *
  */
-void validaCadenaDeLetras(char auxDato [], int cantCaracteres);
+void validaCadenaDeLetras(char *auxDato, int cantCaracteres);
+
+
+
+/** \brief Validacion para cadena alfanumerica.
+ *
+ * \param auxDato char*: cadena de char sujeta a validacion.
+ * \param cantCaracteres int: Cantidad maxima de caracteres permitidos.
+ * \return void La funcion modifica la cadena dada, validando que el tamaño se ajuste al valor dado.
+ *
+ */
+void validaAlfaNumerico(char *auxDato, int cantCaracteres);
 
 
 
@@ -50,7 +76,7 @@ void validaCadenaDeLetras(char auxDato [], int cantCaracteres);
  * \return int: El numero entero elegido como opcion.
  *
  */
-int menu(char opciones[], int limiteInferior, int limiteSuperior);
+int menu(char *opciones, int limiteInferior, int limiteSuperior);
 
 
 
@@ -63,17 +89,17 @@ int menu(char opciones[], int limiteInferior, int limiteSuperior);
 
 /**
  *  Agrega una pelicula al archivo binario
- *  @param movie la estructura a ser agregada al archivo
+ *  @param pelicula la estructura a ser agregada al archivo
  *  @return retorna 1 o 0 de acuerdo a si pudo agregar la pelicula o no
  */
-int agregarPelicula(EMovie movie);
+int agregarPelicula(EMovie pelicula, int cantCaracteres, FILE *bin);
 
 /**
  *  Borra una pelicula del archivo binario
- *  @param movie la estructura a ser eliminada al archivo
+ *  @param pelicula la estructura a ser eliminada al archivo
  *  @return retorna 1 o 0 de acuerdo a si pudo eliminar la pelicula o no
  */
-int borrarPelicula(EMovie movie);
+int borrarPelicula(EMovie *pelicula);
 
 /**
  *  Genera un archivo html a partir de las peliculas cargadas en el archivo binario.

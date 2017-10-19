@@ -9,7 +9,7 @@
 
 
 
-int validaOpcionesInt(char dato[], int limiteInferior, int limiteSuperior){
+int validaOpcionesInt(char *dato, int limiteInferior, int limiteSuperior){
 
     int opciones, cant, i, flag=0;
 
@@ -41,8 +41,7 @@ int validaOpcionesInt(char dato[], int limiteInferior, int limiteSuperior){
 }
 
 
-
-float validaFloat(char dato[]){
+float validaFloat(char *dato){
 
     float auxFloat;
     int cant, i, flag=0;
@@ -75,8 +74,40 @@ float validaFloat(char dato[]){
 }
 
 
+float validaPuntaje(char *dato, float limiteInferior, float limiteSuperior){
 
-void validaCadenaDeLetras(char auxDato [], int cantCaracteres){
+    float auxFloat;
+    int cant, i, flag=0;
+
+    cant = strlen(dato);
+    for(i=0; i<cant; i++){
+        if(isalpha(dato[i])){
+            flag = 1;
+            break;
+        }
+    }
+    while(flag==1 || atof(dato)>limiteSuperior || atof(dato)<limiteInferior){
+        printf("caracteres numericos unicamente(entre %.2f y %.2f): ", limiteInferior, limiteSuperior);
+        scanf("%s", dato);
+        cant = strlen(dato);
+
+        for(i=0; i<cant; i++){
+            if(isalpha(dato[i])){
+                flag = 1;
+                break;
+            }
+            else{
+                flag = 0;
+            }
+        }
+    }
+
+    auxFloat = atof(dato);
+    return auxFloat;
+}
+
+
+void validaCadenaDeLetras(char *auxDato, int cantCaracteres){
 
     int i, cant, flag=0;
 
@@ -107,8 +138,20 @@ void validaCadenaDeLetras(char auxDato [], int cantCaracteres){
 }
 
 
+void validaAlfaNumerico(char *auxDato, int cantCaracteres){
+    int cant;
+    cant = strlen(auxDato);
 
-int menu(char items[], int limiteInferior, int limiteSuperior){
+    while (cant>cantCaracteres){
+        printf("Ingrese caracteres alfanumericos (maximo:%d ): ", cantCaracteres);
+        fflush(stdin);
+        scanf("%[^\n]", auxDato);
+        cant = strlen(auxDato);
+    }
+}
+
+
+int menu(char *items, int limiteInferior, int limiteSuperior){
 
     char dato[10];
     int opciones;
@@ -124,9 +167,61 @@ int menu(char items[], int limiteInferior, int limiteSuperior){
 
 
 
+int agregarPelicula(EMovie pelicula, int cantCaracteres, FILE *bin){
+
+    char auxdato[cantCaracteres*5];
+
+
+    printf("Ingesar titulo de la pelicula: \n");
+    fflush(stdin);
+    scanf("%[^\n]", auxdato);
+    validaCadenaDeLetras(auxdato, cantCaracteres);
+    strcpy(pelicula.titulo, auxdato);
+
+
+    printf("Ingresar genero: \n");
+    fflush(stdin);
+    scanf("%[^\n]", auxdato);
+    validaCadenaDeLetras(auxdato, cantCaracteres);
+    strcpy(pelicula.genero, auxdato);
+
+
+    printf("Ingresar duracion en minutos: \n");
+    fflush(stdin);
+    scanf("%[^\n]", auxdato);
+    pelicula.duracion = validaOpcionesInt(auxdato, 1, 200);
+
+
+    printf("Ingesar breve descripcion de la pelicula: \n");
+    fflush(stdin);
+    scanf("%[^\n]", auxdato);
+    validaCadenaDeLetras(auxdato, cantCaracteres*2);
+    strcpy(pelicula.descripcion, auxdato);
+
+
+    printf("Ingresar puntaje: \n");
+    fflush(stdin);
+    scanf("%[^\n]", auxdato);
+    pelicula.puntaje = validaPuntaje(auxdato, 1, 10);
+
+
+    printf("Ingesar link de imagen: \n");
+    fflush(stdin);
+    scanf("%[^\n]", auxdato);
+    validaAlfaNumerico(auxdato, cantCaracteres*6);
+    strcpy(pelicula.linkImagen, auxdato);
 
 
 
+    fflush(stdin);
+    fseek(bin, 0L, SEEK_END);
+    fwrite(&pelicula, sizeof(pelicula), 1, bin);
+
+
+
+    return 0;
+
+}
 
 
 

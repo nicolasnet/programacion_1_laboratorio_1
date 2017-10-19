@@ -92,11 +92,11 @@ int main (void)
 
 
 
-/*              ABRIR, LEER Y ESCRIBIR ARCHIVO BINARIO.
+//             ABRIR, LEER Y ESCRIBIR ARCHIVO BINARIO.
 
 #include <stdio.h>
 
-#define ARCH	"c:\\Archivos\\bin.dat"
+#define ARCH	"./bin.dat"
 #define ESC 27
 
 struct a{
@@ -109,7 +109,7 @@ int main (void)
    FILE  *bin;
    struct a pers;
    int cant;
-    //Con estas secuencias, nos aseguramos de q si lo puede leer, no lo elimine y lo cree nuevamente
+    //Con estas secuencias, nos aseguramos de q si lo puede leer, no lo elimine y lo cree nuevamente en caso de no existir.
    if ((bin = fopen(ARCH,"rb+"))==NULL){        //con rb+ lee y escribe pero no abre un archivo nuevo en caso de no encontrarlo
       if ((bin = fopen(ARCH,"wb+"))==NULL){     //con wb+ crea un archivo, si ya existia lo borra y crea nuevamente.
          printf("No se pudo abrir el archivo");
@@ -157,7 +157,7 @@ int main (void)
    return 0;
 }
 
-*/
+
 
 
 /*      UN ABM Y GENERACION DE TXT, Y ALMACENAR EL ARCHIVO
