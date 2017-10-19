@@ -2,6 +2,7 @@
 
 
 typedef struct{
+    int codigo;
     char titulo[CANTCARACTERES];
     char genero[CANTCARACTERES];
     int duracion;
@@ -85,7 +86,7 @@ int menu(char *opciones, int limiteInferior, int limiteSuperior);
 
 
 
-
+void imprimePeliculas(EMovie pelicula, FILE *bin);
 
 /**
  *  Agrega una pelicula al archivo binario
@@ -99,7 +100,13 @@ int agregarPelicula(EMovie pelicula, int cantCaracteres, FILE *bin);
  *  @param pelicula la estructura a ser eliminada al archivo
  *  @return retorna 1 o 0 de acuerdo a si pudo eliminar la pelicula o no
  */
-int borrarPelicula(EMovie *pelicula);
+int borrarPelicula(EMovie pelicula, FILE *bin);
+
+
+
+void modificaPelicula(EMovie pelicula, int cantCaracteres, FILE *bin);
+
+
 
 /**
  *  Genera un archivo html a partir de las peliculas cargadas en el archivo binario.

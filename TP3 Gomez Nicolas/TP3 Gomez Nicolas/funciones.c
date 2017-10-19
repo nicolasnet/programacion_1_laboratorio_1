@@ -172,6 +172,12 @@ int agregarPelicula(EMovie pelicula, int cantCaracteres, FILE *bin){
     char auxdato[cantCaracteres*5];
 
 
+    printf("Ingresar codigo de pelicula: \n");
+    fflush(stdin);
+    scanf("%[^\n]", auxdato);
+    pelicula.codigo = validaOpcionesInt(auxdato, 1, 9999);
+
+
     printf("Ingesar titulo de la pelicula: \n");
     fflush(stdin);
     scanf("%[^\n]", auxdato);
@@ -224,15 +230,196 @@ int agregarPelicula(EMovie pelicula, int cantCaracteres, FILE *bin){
 }
 
 
+void imprimePeliculas(EMovie pelicula, FILE *bin){
+    int cant;
+    rewind(bin);
+
+    while(!feof(bin)){
+        cant = fread(&pelicula,sizeof(pelicula), 1, bin);
+
+        if(cant!=1){
+            if(feof(bin)){
+                break;
+            }
+            else{
+                printf("No leyo el ultimo registro");
+                break;
+            }
+        }
+        if(pelicula.codigo != 0)
+            printf("\nCodigo: %d\t%s\t%d m.\t%s\t%s\t%.2f\n%s\n\n",pelicula.codigo, pelicula.titulo, pelicula.duracion, pelicula.genero, pelicula.descripcion, pelicula.puntaje, pelicula.linkImagen);
+    }
+
+}
 
 
 
+int borrarPelicula(EMovie pelicula, FILE *bin){
+    char auxdato[10], seguir;
+    int auxCodigo, cant, flag=0;
+
+    imprimePeliculas(pelicula, bin);
+
+    printf("Ingresar codigo de pelicula a eliminar: \n");
+    fflush(stdin);
+    scanf("%[^\n]", auxdato);
+    auxCodigo = validaOpcionesInt(auxdato, 1, 9999);
+    system("cls");
+
+    rewind(bin);
+
+    while(!feof(bin)){
+        cant = fread(&pelicula,sizeof(pelicula), 1, bin);
+
+        if(cant!=1){
+            if(feof(bin)){
+                break;
+            }
+        }
+
+        if(pelicula.codigo == auxCodigo){
+            printf("Pelicula encontrada: \n");
+            flag=1,
+            printf("\nCodigo: %d\t%s\t%d m.\t%s\t%s\t%.2f\n%s\n\n",pelicula.codigo, pelicula.titulo, pelicula.duracion, pelicula.genero, pelicula.descripcion, pelicula.puntaje, pelicula.linkImagen);
+            printf("Seguro de eliminar esta pelicula? (presionar 's' para confirmar) ");
+            seguir = tolower(getche());
+            if(seguir == 's'){
+                pelicula.codigo = 0;
+
+                fflush(stdin);
+                fseek(bin, (long) (-1)*sizeof(pelicula) , SEEK_CUR);
+                fwrite(&pelicula.codigo, sizeof(pelicula), 1, bin);
+            }
+
+        }
+
+    }
+    if(flag == 0){
+        printf("no se encontro la pelicula.\n\n");
+    }
 
 
+}
 
 
+void modificaPelicula(EMovie pelicula, int cantCaracteres, FILE *bin){
+    char auxdato[10], seguir='s';
+    int auxCodigo, cant, flag=0, opcion;
 
+    imprimePeliculas(pelicula, bin);
 
+    printf("Ingresar codigo de pelicula a modificar: \n");
+    fflush(stdin);
+    scanf("%[^\n]", auxdato);
+    auxCodigo = validaOpcionesInt(auxdato, 1, 9999);
+    system("cls");
+
+    rewind(bin);
+
+    while(!feof(bin)){
+        cant = fread(&pelicula,sizeof(pelicula), 1, bin);
+/*
+        if(cant!=1){
+            if(feof(bin)){
+                break;
+            }
+            else{
+                printf("No leyo el ultimo registro");
+                break;
+            }
+        }
+*/
+        if(pelicula.codigo == auxCodigo){
+            printf("Pelicula encontrada: \n");
+            flag=1,
+            printf("\nCodigo: %d\t%s\t%d m.\t%s\t%s\t%.2f\n%s\n\n",pelicula.codigo, pelicula.titulo, pelicula.duracion, pelicula.genero, pelicula.descripcion, pelicula.puntaje, pelicula.linkImagen);
+
+            while(seguir=='s')
+            {
+                opcion = menu("\t\t\tModificacion de pelicula elegida\n\n1- Titulo\n2- Genero\n3- Duracion\n4- Descripcion\n5- Puntaje\n6- Link de imagen\n7- Salir\n", 1, 7);
+                system("cls");
+
+                switch(opcion)
+                {
+                    case 1:
+                        printf("Ingesar titulo de la pelicula: \n");
+                        fflush(stdin);
+                        scanf("%[^\n]", auxdato);
+                        validaCadenaDeLetras(auxdato, cantCaracteres);
+                        strcpy(pelicula.titulo, auxdato);
+                        fflush(stdin);
+                        fseek(bin, (long) (-1)*sizeof(pelicula) , SEEK_CUR);
+                        fwrite(&pelicula.titulo, sizeof(pelicula), 1, bin);
+                        break;
+
+                    case 2:
+                        printf("Ingresar genero: \n");
+                        fflush(stdin);
+                        scanf("%[^\n]", auxdato);
+                        validaCadenaDeLetras(auxdato, cantCaracteres);
+                        strcpy(pelicula.genero, auxdato);
+                        fflush(stdin);
+                        fseek(bin, (long) (-1)*sizeof(pelicula) , SEEK_CUR);
+                        fwrite(&pelicula.genero, sizeof(pelicula), 1, bin);
+                        break;
+
+                    case 3:
+                        printf("Ingresar duracion en minutos: \n");
+                        fflush(stdin);
+                        scanf("%[^\n]", auxdato);
+                        pelicula.duracion = validaOpcionesInt(auxdato, 1, 200);
+                        fflush(stdin);
+                        fseek(bin, (long) (-1)*sizeof(pelicula) , SEEK_CUR);
+                        fwrite(&pelicula.duracion, sizeof(pelicula), 1, bin);
+                        break;
+
+                    case 4:
+                        printf("Ingesar breve descripcion de la pelicula: \n");
+                        fflush(stdin);
+                        scanf("%[^\n]", auxdato);
+                        validaCadenaDeLetras(auxdato, cantCaracteres*2);
+                        strcpy(pelicula.descripcion, auxdato);
+                        fflush(stdin);
+                        fseek(bin, (long) (-1)*sizeof(pelicula) , SEEK_CUR);
+                        fwrite(&pelicula.descripcion, sizeof(pelicula), 1, bin);
+                        break;
+
+                    case 5:
+                        printf("Ingresar puntaje: \n");
+                        fflush(stdin);
+                        scanf("%[^\n]", auxdato);
+                        pelicula.puntaje = validaPuntaje(auxdato, 1, 10);
+                        fflush(stdin);
+                        fseek(bin, (long) (-1)*sizeof(pelicula) , SEEK_CUR);
+                        fwrite(&pelicula.puntaje, sizeof(pelicula), 1, bin);
+                        break;
+
+                    case 6:
+                        printf("Ingesar link de imagen: \n");
+                        fflush(stdin);
+                        scanf("%[^\n]", auxdato);
+                        validaAlfaNumerico(auxdato, cantCaracteres*6);
+                        strcpy(pelicula.linkImagen, auxdato);
+                        fflush(stdin);
+                        fseek(bin, (long) (-1)*sizeof(pelicula) , SEEK_CUR);
+                        fwrite(&pelicula.linkImagen, sizeof(pelicula), 1, bin);
+                        break;
+
+                    case 7:
+                        seguir = 'n';
+                        break;
+
+                }
+
+            }
+            break;
+        }
+    }
+
+    if(flag == 0){
+        printf("no se encontro la pelicula.\n\n");
+    }
+}
 
 
 

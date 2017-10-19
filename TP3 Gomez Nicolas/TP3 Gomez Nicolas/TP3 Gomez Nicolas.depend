@@ -1,12 +1,12 @@
 # depslib dependency file v1.0
-1508274457 source:c:\users\ed\downloads\programacion_1_laboratorio_1-master\programacion_1_laboratorio_1-master\tp3 gomez nicolas\tp3 gomez nicolas\main.c
+1508446965 source:c:\users\ed\downloads\programacion_1_laboratorio_1-master\programacion_1_laboratorio_1-master\tp3 gomez nicolas\tp3 gomez nicolas\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<ctype.h>
 	"funciones.h"
 
-1508273761 c:\users\ed\downloads\programacion_1_laboratorio_1-master\programacion_1_laboratorio_1-master\tp3 gomez nicolas\tp3 gomez nicolas\funciones.h
+1508446838 c:\users\ed\downloads\programacion_1_laboratorio_1-master\programacion_1_laboratorio_1-master\tp3 gomez nicolas\tp3 gomez nicolas\funciones.h
 
 1508376396 source:m:\nicolas\descargas\programacion_1_laboratorio_1-master\tp3 gomez nicolas\tp3 gomez nicolas\main.c
 	<stdio.h>
@@ -18,6 +18,13 @@
 1508372853 m:\nicolas\descargas\programacion_1_laboratorio_1-master\tp3 gomez nicolas\tp3 gomez nicolas\funciones.h
 
 1508374936 source:m:\nicolas\descargas\programacion_1_laboratorio_1-master\tp3 gomez nicolas\tp3 gomez nicolas\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funciones.h"
+
+1508448165 source:c:\users\ed\downloads\programacion_1_laboratorio_1-master\programacion_1_laboratorio_1-master\tp3 gomez nicolas\tp3 gomez nicolas\funciones.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
