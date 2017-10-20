@@ -6,9 +6,9 @@ typedef struct{
     char titulo[CANTCARACTERES];
     char genero[CANTCARACTERES];
     int duracion;
-    char descripcion[CANTCARACTERES*2];
+    char descripcion[CANTCARACTERES*3];
     float puntaje;
-    char linkImagen[CANTCARACTERES*6];
+    char linkImagen[CANTCARACTERES*10];
 }EMovie;
 
 
@@ -35,7 +35,7 @@ float validaFloat(char *auxdato);
 
 
 
-/** \brief Validaicon de numeros decimales, entre 2 limites.
+/** \brief Validacion de numeros decimales, entre 2 limites.
  *
  * \param dato char*: dato ingresado sujeto a validacion
  * \param limiteInferior float: numero real dado como valor minimo aceptado.
@@ -86,31 +86,49 @@ int menu(char *opciones, int limiteInferior, int limiteSuperior);
 
 
 
+/** \brief muestra en pantalla las peliculas cargadas en un archivo binario
+ *
+ * \param pelicula EMovie: estructura que se lee del archivo.
+ * \param bin FILE*: puntero del archivo en cuestion.
+ * \return void
+ *
+ */
 void imprimePeliculas(EMovie pelicula, FILE *bin);
 
 /**
  *  Agrega una pelicula al archivo binario
  *  @param pelicula la estructura a ser agregada al archivo
- *  @return retorna 1 o 0 de acuerdo a si pudo agregar la pelicula o no
+ *  @return void
  */
-int agregarPelicula(EMovie pelicula, int cantCaracteres, FILE *bin);
+void agregarPelicula(EMovie pelicula, int cantCaracteres, FILE *bin);
 
 /**
  *  Borra una pelicula del archivo binario
  *  @param pelicula la estructura a ser eliminada al archivo
- *  @return retorna 1 o 0 de acuerdo a si pudo eliminar la pelicula o no
+ *  @return cambia a 0 (cero) el codigo de la pelicula elegida.
  */
-int borrarPelicula(EMovie pelicula, FILE *bin);
+void borrarPelicula(EMovie pelicula, FILE *bin);
 
 
 
+/** \brief Modificar datos de una pelicula ya dada de alta en archivo binario.
+ *
+ * \param pelicula EMovie: estructura a modificar.
+ * \param cantCaracteres int: dato entero con cantidad de caracteres para algunas variables.
+ * \param bin FILE*: puntero del archivo binario donde se almacena la informacion.
+ * \return void
+ *
+ */
 void modificaPelicula(EMovie pelicula, int cantCaracteres, FILE *bin);
 
 
 
-/**
- *  Genera un archivo html a partir de las peliculas cargadas en el archivo binario.
- *  @param lista la lista de peliculas a ser agregadas en el archivo.
- *  @param nombre el nombre para el archivo.
+/** \brief Genera un archivo html a partir de las peliculas cargadas en el archivo binario.
+ *
+ * \param pelicula EMovie: estructura que se lee del archivo.
+ * \param nombreDeArchivo char*: Una cadena de caracteres utilizada para dar nombre al archivo html que se crea.
+ * \param bin FILE*: Puntero del archivo binario.
+ * \return void
+ *
  */
-void generarPagina(EMovie lista[], char nombre[]);
+void generarPagina(EMovie pelicula, char *nombreDeArchivo, FILE *bin);

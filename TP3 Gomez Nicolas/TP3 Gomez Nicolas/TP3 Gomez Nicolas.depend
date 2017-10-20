@@ -1,12 +1,12 @@
 # depslib dependency file v1.0
-1508446965 source:c:\users\ed\downloads\programacion_1_laboratorio_1-master\programacion_1_laboratorio_1-master\tp3 gomez nicolas\tp3 gomez nicolas\main.c
+1508534124 source:c:\users\ed\downloads\programacion_1_laboratorio_1-master\programacion_1_laboratorio_1-master\tp3 gomez nicolas\tp3 gomez nicolas\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<ctype.h>
 	"funciones.h"
 
-1508446838 c:\users\ed\downloads\programacion_1_laboratorio_1-master\programacion_1_laboratorio_1-master\tp3 gomez nicolas\tp3 gomez nicolas\funciones.h
+1508533128 c:\users\ed\downloads\programacion_1_laboratorio_1-master\programacion_1_laboratorio_1-master\tp3 gomez nicolas\tp3 gomez nicolas\funciones.h
 
 1508376396 source:m:\nicolas\descargas\programacion_1_laboratorio_1-master\tp3 gomez nicolas\tp3 gomez nicolas\main.c
 	<stdio.h>
@@ -24,7 +24,7 @@
 	<ctype.h>
 	"funciones.h"
 
-1508448165 source:c:\users\ed\downloads\programacion_1_laboratorio_1-master\programacion_1_laboratorio_1-master\tp3 gomez nicolas\tp3 gomez nicolas\funciones.c
+1508533251 source:c:\users\ed\downloads\programacion_1_laboratorio_1-master\programacion_1_laboratorio_1-master\tp3 gomez nicolas\tp3 gomez nicolas\funciones.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

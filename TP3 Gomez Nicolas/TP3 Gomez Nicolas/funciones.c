@@ -167,9 +167,11 @@ int menu(char *items, int limiteInferior, int limiteSuperior){
 
 
 
-int agregarPelicula(EMovie pelicula, int cantCaracteres, FILE *bin){
 
-    char auxdato[cantCaracteres*5];
+
+void agregarPelicula(EMovie pelicula, int cantCaracteres, FILE *bin){
+
+    char auxdato[cantCaracteres*10];
 
 
     printf("Ingresar codigo de pelicula: \n");
@@ -181,7 +183,7 @@ int agregarPelicula(EMovie pelicula, int cantCaracteres, FILE *bin){
     printf("Ingesar titulo de la pelicula: \n");
     fflush(stdin);
     scanf("%[^\n]", auxdato);
-    validaCadenaDeLetras(auxdato, cantCaracteres);
+    validaAlfaNumerico(auxdato, cantCaracteres); //no valido solo letras para poder ingresar numeros en los numeros por las secuelas
     strcpy(pelicula.titulo, auxdato);
 
 
@@ -201,7 +203,7 @@ int agregarPelicula(EMovie pelicula, int cantCaracteres, FILE *bin){
     printf("Ingesar breve descripcion de la pelicula: \n");
     fflush(stdin);
     scanf("%[^\n]", auxdato);
-    validaCadenaDeLetras(auxdato, cantCaracteres*2);
+    validaCadenaDeLetras(auxdato, cantCaracteres*3);
     strcpy(pelicula.descripcion, auxdato);
 
 
@@ -214,7 +216,7 @@ int agregarPelicula(EMovie pelicula, int cantCaracteres, FILE *bin){
     printf("Ingesar link de imagen: \n");
     fflush(stdin);
     scanf("%[^\n]", auxdato);
-    validaAlfaNumerico(auxdato, cantCaracteres*6);
+    validaAlfaNumerico(auxdato, cantCaracteres*10);
     strcpy(pelicula.linkImagen, auxdato);
 
 
@@ -222,10 +224,6 @@ int agregarPelicula(EMovie pelicula, int cantCaracteres, FILE *bin){
     fflush(stdin);
     fseek(bin, 0L, SEEK_END);
     fwrite(&pelicula, sizeof(pelicula), 1, bin);
-
-
-
-    return 0;
 
 }
 
@@ -242,19 +240,18 @@ void imprimePeliculas(EMovie pelicula, FILE *bin){
                 break;
             }
             else{
-                printf("No leyo el ultimo registro");
+                printf("No leyo el ultimo registro\n");
                 break;
             }
         }
         if(pelicula.codigo != 0)
-            printf("\nCodigo: %d\t%s\t%d m.\t%s\t%s\t%.2f\n%s\n\n",pelicula.codigo, pelicula.titulo, pelicula.duracion, pelicula.genero, pelicula.descripcion, pelicula.puntaje, pelicula.linkImagen);
+            printf("\nCodigo: %04d\t% 25s.\tDuracion: %d min.\tGenero: %s.\tPuntaje: %.2f.\nDescripcion: %s.\n%s\n\n",pelicula.codigo, pelicula.titulo, pelicula.duracion, pelicula.genero, pelicula.puntaje, pelicula.descripcion, pelicula.linkImagen);
     }
 
 }
 
 
-
-int borrarPelicula(EMovie pelicula, FILE *bin){
+void borrarPelicula(EMovie pelicula, FILE *bin){
     char auxdato[10], seguir;
     int auxCodigo, cant, flag=0;
 
@@ -270,26 +267,32 @@ int borrarPelicula(EMovie pelicula, FILE *bin){
 
     while(!feof(bin)){
         cant = fread(&pelicula,sizeof(pelicula), 1, bin);
-
+/*
         if(cant!=1){
             if(feof(bin)){
                 break;
             }
         }
-
+*/
         if(pelicula.codigo == auxCodigo){
             printf("Pelicula encontrada: \n");
             flag=1,
             printf("\nCodigo: %d\t%s\t%d m.\t%s\t%s\t%.2f\n%s\n\n",pelicula.codigo, pelicula.titulo, pelicula.duracion, pelicula.genero, pelicula.descripcion, pelicula.puntaje, pelicula.linkImagen);
-            printf("Seguro de eliminar esta pelicula? (presionar 's' para confirmar) ");
+            printf("Confirma eliminacion de esta pelicula? (presionar 's' para confirmar)");
             seguir = tolower(getche());
+            printf("\n\n");
             if(seguir == 's'){
                 pelicula.codigo = 0;
 
                 fflush(stdin);
                 fseek(bin, (long) (-1)*sizeof(pelicula) , SEEK_CUR);
                 fwrite(&pelicula.codigo, sizeof(pelicula), 1, bin);
+                printf("Pelicula eliminada.\n\n");
             }
+            else{
+                printf("Pelicula NO eliminada\n\n");
+            }
+            break;
 
         }
 
@@ -303,7 +306,7 @@ int borrarPelicula(EMovie pelicula, FILE *bin){
 
 
 void modificaPelicula(EMovie pelicula, int cantCaracteres, FILE *bin){
-    char auxdato[10], seguir='s';
+    char auxdato[cantCaracteres*10], seguir='s';
     int auxCodigo, cant, flag=0, opcion;
 
     imprimePeliculas(pelicula, bin);
@@ -345,11 +348,8 @@ void modificaPelicula(EMovie pelicula, int cantCaracteres, FILE *bin){
                         printf("Ingesar titulo de la pelicula: \n");
                         fflush(stdin);
                         scanf("%[^\n]", auxdato);
-                        validaCadenaDeLetras(auxdato, cantCaracteres);
+                        validaAlfaNumerico(auxdato, cantCaracteres); //no valido solo letras para poder ingresar numeros en los numeros por las secuelas
                         strcpy(pelicula.titulo, auxdato);
-                        fflush(stdin);
-                        fseek(bin, (long) (-1)*sizeof(pelicula) , SEEK_CUR);
-                        fwrite(&pelicula.titulo, sizeof(pelicula), 1, bin);
                         break;
 
                     case 2:
@@ -358,9 +358,6 @@ void modificaPelicula(EMovie pelicula, int cantCaracteres, FILE *bin){
                         scanf("%[^\n]", auxdato);
                         validaCadenaDeLetras(auxdato, cantCaracteres);
                         strcpy(pelicula.genero, auxdato);
-                        fflush(stdin);
-                        fseek(bin, (long) (-1)*sizeof(pelicula) , SEEK_CUR);
-                        fwrite(&pelicula.genero, sizeof(pelicula), 1, bin);
                         break;
 
                     case 3:
@@ -368,20 +365,14 @@ void modificaPelicula(EMovie pelicula, int cantCaracteres, FILE *bin){
                         fflush(stdin);
                         scanf("%[^\n]", auxdato);
                         pelicula.duracion = validaOpcionesInt(auxdato, 1, 200);
-                        fflush(stdin);
-                        fseek(bin, (long) (-1)*sizeof(pelicula) , SEEK_CUR);
-                        fwrite(&pelicula.duracion, sizeof(pelicula), 1, bin);
                         break;
 
                     case 4:
                         printf("Ingesar breve descripcion de la pelicula: \n");
                         fflush(stdin);
                         scanf("%[^\n]", auxdato);
-                        validaCadenaDeLetras(auxdato, cantCaracteres*2);
+                        validaCadenaDeLetras(auxdato, cantCaracteres*3);
                         strcpy(pelicula.descripcion, auxdato);
-                        fflush(stdin);
-                        fseek(bin, (long) (-1)*sizeof(pelicula) , SEEK_CUR);
-                        fwrite(&pelicula.descripcion, sizeof(pelicula), 1, bin);
                         break;
 
                     case 5:
@@ -389,23 +380,20 @@ void modificaPelicula(EMovie pelicula, int cantCaracteres, FILE *bin){
                         fflush(stdin);
                         scanf("%[^\n]", auxdato);
                         pelicula.puntaje = validaPuntaje(auxdato, 1, 10);
-                        fflush(stdin);
-                        fseek(bin, (long) (-1)*sizeof(pelicula) , SEEK_CUR);
-                        fwrite(&pelicula.puntaje, sizeof(pelicula), 1, bin);
                         break;
 
                     case 6:
                         printf("Ingesar link de imagen: \n");
                         fflush(stdin);
                         scanf("%[^\n]", auxdato);
-                        validaAlfaNumerico(auxdato, cantCaracteres*6);
+                        validaAlfaNumerico(auxdato, cantCaracteres*10);
                         strcpy(pelicula.linkImagen, auxdato);
-                        fflush(stdin);
-                        fseek(bin, (long) (-1)*sizeof(pelicula) , SEEK_CUR);
-                        fwrite(&pelicula.linkImagen, sizeof(pelicula), 1, bin);
                         break;
 
                     case 7:
+                        fflush(stdin);
+                        fseek(bin, (long) (-1)*sizeof(pelicula) , SEEK_CUR);
+                        fwrite(&pelicula, sizeof(pelicula), 1, bin);
                         seguir = 'n';
                         break;
 
@@ -422,6 +410,61 @@ void modificaPelicula(EMovie pelicula, int cantCaracteres, FILE *bin){
 }
 
 
+
+void generarPagina(EMovie pelicula, char *nombreDeArchivo, FILE *bin){
+
+    int cant;
+    FILE *html;
+
+    html=fopen(nombreDeArchivo, "w");
+
+    if(html == NULL)
+    {
+        printf("No se pudo abrir el archivo\n");
+    }
+    else
+    {
+
+        fprintf(html, "<!DOCTYPE html>\n<!-- Template by Quackit.com -->\n<html lang='en'>\n<head>\n    <meta charset='utf-8'>\n    <meta http-equiv='X-UA-Compatible' content='IE=edge'>\n    <meta name='viewport' content='width=device-width, initial-scale=1'>\n    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->\n    <title>Lista peliculas</title>\n    <!-- Bootstrap Core CSS -->\n    <link href='css/bootstrap.min.css' rel='stylesheet'>\n    <!-- Custom CSS: You can use this stylesheet to override any Bootstrap styles and/or apply your own styles -->\n    <link href='css/custom.css' rel='stylesheet'>\n    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->\n    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->\n    <!--[if lt IE 9]>\n        <script src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js'></script>\n        <script src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js'></script>\n    <![endif]-->\n</head>\n<body>\n    <div class='container'>\n        <div class='row'>\n\n\n\n\n");
+
+
+
+
+        rewind(bin);
+
+        while(!feof(bin)){
+            cant = fread(&pelicula,sizeof(pelicula), 1, bin);
+
+            if(cant!=1){
+                if(feof(bin)){
+                    break;
+                }
+                else{
+                    printf("No leyo el ultimo registro");
+                    break;
+                }
+            }
+            if(pelicula.codigo != 0)
+                fprintf(html, "            <article class='col-md-4 article-intro'>\n                <a href='#'>\n                    <img class='img-responsive img-rounded' src='%s' alt=''>\n                </a>\n                <h3>\n                    <a href='#'>%s</a>\n                </h3>\n				<ul>\n                    <li>Codigo: %04d</li>\n					<li>Genero: %s</li>\n					<li>Puntaje: %.2f</li>\n					<li>Duracion:%d minutos</li>\n				</ul>\n                <p>%s.</p>\n            </article>\n\n\n\n", pelicula.linkImagen, pelicula.titulo, pelicula.codigo, pelicula.genero, pelicula.puntaje, pelicula.duracion, pelicula.descripcion);
+        }
+
+
+
+
+            fprintf(html, "\n\n\n        </div>\n        <!-- /.row -->\n    </div>\n    <!-- /.container -->\n    <!-- jQuery -->\n    <script src='js/jquery-1.11.3.min.js'></script>\n    <!-- Bootstrap Core JavaScript -->\n    <script src='js/bootstrap.min.js'></script>\n	<!-- IE10 viewport bug workaround -->\n	<script src='js/ie10-viewport-bug-workaround.js'></script>\n	<!-- Placeholder Images -->\n	<script src='js/holder.min.js'></script>\n</body>\n</html>");
+
+    }
+
+
+
+
+
+    fclose(html);
+
+    printf("Listado creado con exito\n");
+
+
+}
 
 
 
