@@ -1,31 +1,7 @@
 # depslib dependency file v1.0
-1476059796 source:/Users/Mauro/Documents/workspace_videos_c/People/main.c
-	<stdio.h>
-	<stdlib.h>
-	"People.h"
-
-1476059891 /Users/Mauro/Documents/workspace_videos_c/People/People.h
-
-1476059945 source:/Users/Mauro/Documents/workspace_videos_c/People/People.c
-	<stdlib.h>
-	"People.h"
-
-1476060823 source:/Users/Mauro/Documents/workspace_videos_c/Memoria_Dinamica/People/Person.c
-	<stdlib.h>
-	"Person.h"
-
-1476060823 /Users/Mauro/Documents/workspace_videos_c/Memoria_Dinamica/People/Person.h
-
-1508806287 source:d:\gomez nicolas rodrigo\clase_17\people\main.c
-	<stdio.h>
-	<stdlib.h>
-	"Person.h"
-	<stdio.h>
-	<stdlib.h>
-
-1508800264 d:\gomez nicolas rodrigo\clase_17\people\person.h
-
 1508800266 source:d:\gomez nicolas rodrigo\clase_17\people\person.c
 	<stdlib.h>
 	"Person.h"
+
+1508800264 d:\gomez nicolas rodrigo\clase_17\people\person.h
 

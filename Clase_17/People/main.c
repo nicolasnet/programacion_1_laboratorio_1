@@ -16,14 +16,8 @@ free(Pers); libero memoria. OJO NO LIBERAR MEMORIA SI YA SE HIZO O SI EL PUNTERO
 
 
 
+
 /*
-#include <stdio.h>
-#include <stdlib.h>
-#include "Person.h"
-*/
-
-
-
 #include <stdio.h>
 #include <stdlib.h>
 struct persona
@@ -43,7 +37,7 @@ int main()
     struct persona* pArrayPersona;
     struct persona* pAuxPersona;
     // Creamos el array de personas
-    pArrayPersona = malloc(sizeof(struct persona));
+    pArrayPersona = (struct persona *) malloc(sizeof(struct persona));
     if (pArrayPersona == NULL)
     {
         printf("\nNo hay lugar en memoria\n");
@@ -60,16 +54,20 @@ int main()
 
             if(seguirCargando == 1)
             {
+                logitudPersonas++; //Incremento el contador de personas
+
                 // Calculamos el nuevo tamaño del array
                 auxNuevaLogitud = sizeof(struct persona) * logitudPersonas; //por esta multiplicacion es q inicia el logitudPersona en 1.
+
                 // Redimencionamos la lista
-                pAuxPersona = realloc( pArrayPersona, auxNuevaLogitud);
+                pAuxPersona = (struct persona *) realloc( pArrayPersona, auxNuevaLogitud);
+
                 if (pAuxPersona == NULL)
                 {
-                    printf("\nNo hay lugar en memoria\n");
+                    printf("\nNo hay lugar en memoria para nada\n");
                     break;
                 }
-                logitudPersonas++; //Incremento el contador de personas
+
                 pArrayPersona = pAuxPersona;
             }
             else
@@ -85,12 +83,14 @@ int main()
     }
     free(pArrayPersona); // Liberamos la memoria
     return 0;
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "Person.h"
 
 
-
-
-/*
-    Person* personArray[50];
+    Person* personArray[10];
     int i;
     for(i = 0; i < 10; i++)
     {
@@ -106,8 +106,6 @@ int main()
     }
     scanf(" ");
     return 0;
-*/
-
 
 
 }
