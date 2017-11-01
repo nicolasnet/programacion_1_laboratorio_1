@@ -43,7 +43,7 @@ int main()
                 break;
 
             case 4:
-
+                al_newArrayList();
                 break;
 
             case 5:

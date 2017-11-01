@@ -35,6 +35,3 @@ void employee_delete(Employee* this);
 int employee_setId(Employee* this, int id);
 int employee_getId(Employee* this);
 #endif // _EMPLOYEE_H
-
-
-

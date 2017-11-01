@@ -6,5 +6,6 @@
 
 int parserEmployee(FILE* pFile , ArrayList* pArrayListEmployee)
 {
+    fscanf()
     return 0;
 }

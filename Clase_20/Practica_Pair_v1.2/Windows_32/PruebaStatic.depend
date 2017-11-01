@@ -78,3 +78,35 @@
 
 1509408856 c:\users\alumno\desktop\practica_pair_v1.2\windows_32\validar.h
 
+1477571236 source:d:\gomez nicolas rodrigo\clase_20\practica_pair_v1.2\windows_32\employee.c
+	<stdio.h>
+	<stdlib.h>
+	"ArrayList.h"
+	"Employee.h"
+
+1509493997 d:\gomez nicolas rodrigo\clase_20\practica_pair_v1.2\windows_32\arraylist.h
+
+1509496220 d:\gomez nicolas rodrigo\clase_20\practica_pair_v1.2\windows_32\employee.h
+
+1509495210 source:d:\gomez nicolas rodrigo\clase_20\practica_pair_v1.2\windows_32\main.c
+	<stdio.h>
+	<stdlib.h>
+	"ArrayList.h"
+	"Employee.h"
+	"validar.h"
+
+1509408856 d:\gomez nicolas rodrigo\clase_20\practica_pair_v1.2\windows_32\validar.h
+
+1464384470 source:d:\gomez nicolas rodrigo\clase_20\practica_pair_v1.2\windows_32\parser.c
+	<stdio.h>
+	<stdlib.h>
+	"ArrayList.h"
+	"Employee.h"
+
+1509409360 source:d:\gomez nicolas rodrigo\clase_20\practica_pair_v1.2\windows_32\validar.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"validar.h"
+

@@ -19,9 +19,9 @@
 #ifndef __ARRAYLIST
 #define __ARRAYLIST
 struct ArrayList{
-    int size;
-    void **pElements;
-    int reservedSize;
+    int size; //indice
+    void **pElements; //aca esta la lista de punteros q lleva a los datos de personas
+    int reservedSize; //seria size en lo q vimos en el pdf.
 
     int     (*add)();
     int     (*len)();
