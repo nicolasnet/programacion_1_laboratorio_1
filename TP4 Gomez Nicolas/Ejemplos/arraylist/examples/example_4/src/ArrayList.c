@@ -120,33 +120,52 @@ int al_add(ArrayList* this, void* pElement)
  */
 int al_deleteArrayList(ArrayList* this)
 {
-    int returnAux = -1;
+    int returnAux = -1, i;
+
+    if(this != NULL){
+        for(i=0; i<this->size; i++){
+            free(this->pElements[i]);
+        }
+
+        free(this->pElements);
+        free(this);
+
+        returnAux = 0;
+    }
 
     return returnAux;
 }
 
-/** \brief  Delete arrayList
- * \param pList ArrayList* Pointer to arrayList
- * \return int Return length of array or (-1) if Error [pList is NULL pointer]
+/** \brief  Obtener tamaño de la lista.
+ * \param pList ArrayList* Puntero hacia el ArrayList.
+ * \return int Return largo de la lista o -1 en caso de que el arrayList sea NULL.
  *
  */
 int al_len(ArrayList* this)
 {
     int returnAux = -1;
 
+    if(this != NULL){
+        returnAux = this->size;
+    }
+
     return returnAux;
 }
 
 
-/** \brief  Get an element by index
- * \param pList ArrayList* Pointer to arrayList
- * \param index int Index of the element
- * \return void* Return (NULL) if Error [pList is NULL pointer or invalid index] - (Pointer to element) if Ok
+/** \brief  Get an element by index.
+ * \param pList ArrayList* Pointer to arrayList.
+ * \param index int Index of the element.
+ * \return void* Return (NULL) if Error [pList is NULL pointer or invalid index] - (Pointer to element) if Ok.
  *
  */
 void* al_get(ArrayList* this, int index)
 {
     void* returnAux = NULL;
+
+    if(this != NULL && index >= 0 && index < this->size){
+        returnAux = this->pElements[index];
+    }
 
     return returnAux;
 }
@@ -162,7 +181,23 @@ void* al_get(ArrayList* this, int index)
  */
 int al_contains(ArrayList* this, void* pElement)
 {
-    int returnAux = -1;
+    int returnAux = -1, flag = 0, i;
+
+    if(this != NULL && pElement != NULL){
+
+        for(i = 0; i < this->size; i++){
+            if(pElement == this->pElements[i]){
+                returnAux=1;
+                flag=1;
+                break;
+            }
+        }
+
+        if(flag==0){
+            returnAux=0;
+        }
+
+    }
 
     return returnAux;
 }
@@ -180,6 +215,12 @@ int al_set(ArrayList* this, int index,void* pElement)
 {
     int returnAux = -1;
 
+    if(this!=NULL && pElement!=NULL && index>=0 && index<this->size){
+
+        this->pElements[index] = pElement;
+        returnAux=0;
+    }
+
     return returnAux;
 }
 
@@ -193,6 +234,13 @@ int al_set(ArrayList* this, int index,void* pElement)
 int al_remove(ArrayList* this,int index)
 {
     int returnAux = -1;
+
+    if(this != NULL && index >= 0 && index < this->size){
+
+        free(this->pElements[index]);
+        //returnAux=0; //
+        returnAux = contract(this, index);
+    }
 
     return returnAux;
 }
@@ -365,9 +413,22 @@ int expand(ArrayList* this,int index)
  * \return int Return (-1) if Error [pList is NULL pointer or invalid index]
  *                  - ( 0) if Ok
  */
-int contract(ArrayList* this,int index)
+int contract(ArrayList* this, int index)
 {
-    int returnAux = -1;
+    int returnAux = -1, i;
+
+    if(this != NULL && index >= 0 && index < this->size){
+        for(i = index; i  <  this->size; i++){
+            this->pElements[i] = this->pElements[i+1];
+        }
+
+        //if((this->pElements[this->size-1]) != NULL)
+        //printf("hola"); return returnAux;
+        free(this->pElements[this->size-1]);
+        //this->size--; //ESTE SIZE-- PONERLO EN EL REMOVE DESPUES DE USAR CONTRACT
+
+        returnAux=0;
+    }
 
     return returnAux;
 }
