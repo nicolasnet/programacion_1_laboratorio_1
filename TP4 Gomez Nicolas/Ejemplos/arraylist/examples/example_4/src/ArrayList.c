@@ -123,14 +123,14 @@ int al_deleteArrayList(ArrayList* this)
     int returnAux = -1, i;
 
     if(this != NULL){
-        for(i=0; i<this->size; i++){
-            free(this->pElements[i]);
+
+
+        returnAux = al_clear(this);
+
+        if(returnAux == 0){
+            free(this->pElements);
+            free(this);
         }
-
-        free(this->pElements);
-        free(this);
-
-        returnAux = 0;
     }
 
     return returnAux;
@@ -238,10 +238,10 @@ int al_remove(ArrayList* this,int index)
     if(this != NULL && index >= 0 && index < this->size){
 
         free(this->pElements[index]);
-        //returnAux=0; //
+        //returnAux=0;
         returnAux = contract(this, index);
+        this->size = this->size - 1;
     }
-
     return returnAux;
 }
 
@@ -254,7 +254,16 @@ int al_remove(ArrayList* this,int index)
  */
 int al_clear(ArrayList* this)
 {
-    int returnAux = -1;
+    int returnAux = -1, i;
+
+    if(this != NULL){
+        for(i=0; i<this->size; i++){
+            free(this->pElements[i]);
+        }
+        returnAux = 0;
+        this->size = 0;
+    }
+
 
     return returnAux;
 }
@@ -285,7 +294,21 @@ ArrayList* al_clone(ArrayList* this)
  */
 int al_push(ArrayList* this, int index, void* pElement)
 {
-    int returnAux = -1;
+    int returnAux = -1, i;
+    void* ElementAux;
+
+    if(this!=NULL && pElement!=NULL && index>=0 && index<this->size){
+
+        ElementAux = this->pElements[this->size-1];
+
+        for(i=this->size-1; i >= index+1; i--){
+            this->pElements[i] = this->pElements[i-1];
+        }
+
+        returnAux = al_set(this, index, pElement);
+
+        returnAux = al_add(this, ElementAux);
+    }
 
     return returnAux;
 }
@@ -423,9 +446,9 @@ int contract(ArrayList* this, int index)
         }
 
         //if((this->pElements[this->size-1]) != NULL)
-        //printf("hola"); return returnAux;
+
         free(this->pElements[this->size-1]);
-        //this->size--; //ESTE SIZE-- PONERLO EN EL REMOVE DESPUES DE USAR CONTRACT
+
 
         returnAux=0;
     }
