@@ -297,18 +297,20 @@ int al_push(ArrayList* this, int index, void* pElement)
     int returnAux = -1, i;
     void* ElementAux;
 
-    if(this!=NULL && pElement!=NULL && index>=0 && index<this->size){
+    if(this!=NULL && pElement!=NULL && index>=0 && index<=this->size){
+        printf("\nIndex: %d, Size: %d",index, this->size);
 
-        ElementAux = this->pElements[this->size-1];
-
-        for(i=this->size-1; i >= index+1; i--){
-            this->pElements[i] = this->pElements[i-1];
+        for(i = this->size; i > index; i--){
+            printf("\nIndex: %d - i: %d - Size: %d", index, i, this->size);
+            this->pElements[i+1] = this->pElements[i];
         }
+
+        this->size++;
 
         returnAux = al_set(this, index, pElement);
 
-        returnAux = al_add(this, ElementAux);
     }
+
 
     return returnAux;
 }
@@ -412,6 +414,9 @@ int al_sort(ArrayList* this, int (*pFunc)(void* ,void*), int order)
 int resizeUp(ArrayList* this)
 {
     int returnAux = -1;
+
+
+
 
     return returnAux;
 
