@@ -1,0 +1,41 @@
+# depslib dependency file v1.0
+1511815193 source:m:\nicolas\descargas\programacion_1_laboratorio_1-master\modelo p2 laboratorio 1\codeblocks p2\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funciones.h"
+	"ArrayList.h"
+	"destinatario.h"
+
+1511816585 m:\nicolas\descargas\programacion_1_laboratorio_1-master\modelo p2 laboratorio 1\codeblocks p2\funciones.h
+	"ArrayList.h"
+
+1511813490 source:m:\nicolas\descargas\programacion_1_laboratorio_1-master\modelo p2 laboratorio 1\codeblocks p2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funciones.h"
+	"ArrayList.h"
+	"destinatario.h"
+
+1511791270 m:\nicolas\descargas\programacion_1_laboratorio_1-master\modelo p2 laboratorio 1\codeblocks p2\arraylist.h
+
+1511808324 source:m:\nicolas\descargas\programacion_1_laboratorio_1-master\modelo p2 laboratorio 1\codeblocks p2\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+
+1511807338 source:m:\nicolas\descargas\programacion_1_laboratorio_1-master\modelo p2 laboratorio 1\codeblocks p2\destinatario.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funciones.h"
+	"ArrayList.h"
+	"destinatario.h"
+
+1511810911 m:\nicolas\descargas\programacion_1_laboratorio_1-master\modelo p2 laboratorio 1\codeblocks p2\destinatario.h
+
