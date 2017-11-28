@@ -1,0 +1,41 @@
+# depslib dependency file v1.0
+1511830055 source:d:\1f sp_gomeznicolas\sp_gomez nicolas\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+
+1511791272 d:\1f sp_gomeznicolas\sp_gomez nicolas\arraylist.h
+
+1511831666 source:d:\1f sp_gomeznicolas\sp_gomez nicolas\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funciones.h"
+	"ArrayList.h"
+	"numero.h"
+
+1511829364 d:\1f sp_gomeznicolas\sp_gomez nicolas\funciones.h
+	"ArrayList.h"
+
+1511828112 d:\1f sp_gomeznicolas\sp_gomez nicolas\numero.h
+
+1511831575 source:d:\1f sp_gomeznicolas\sp_gomez nicolas\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funciones.h"
+	"ArrayList.h"
+	"numero.h"
+
+1511828279 source:d:\1f sp_gomeznicolas\sp_gomez nicolas\numero.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"funciones.h"
+	"ArrayList.h"
+	"numero.h"
+
