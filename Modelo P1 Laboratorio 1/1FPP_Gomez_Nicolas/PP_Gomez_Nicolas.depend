@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1506993595 source:d:\pp_gomez_nicolas\lib.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"lib.h"
+
+1506993779 d:\pp_gomez_nicolas\lib.h
+
+1506991508 source:d:\pp_gomez_nicolas\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"lib.h"
+
